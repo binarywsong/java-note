@@ -514,5 +514,238 @@ public class ChildServiceImpl implements ChildService{
     public List<Child> queryAll(){
         retrun cs.selectAll();
     }
+    @Override
+    public void removeById(Integer id){
+        try{
+            cs.deleteById(id);
+        }catch(Exception e){
+            throw new RuntimeException("根据ID删除异常");
+        }
+    }
+    @Override
+    public void addChild(Child child){
+        try{
+            cs.insertChild(child);
+        }catch(Exception e){
+            throw new RuntimeException("根据ID删除异常");
+        }
+    }
+    @Override
+    public Child queryById(Integer id){
+        return cd.selectById(id);
+    }
+}
+```
+**5**、数据回显之Controller
+在com.example.child.controller包下的ChildController:
+```Java
+@Controller
+@RequestMapping("/child/")
+public class ChildController(){
+    @Autowired
+    private ChildService cs;
+    //全查
+    @RequestMapping("queryAll")
+    public String queryAll(Model model){
+        List<Child> list = cs.queryAll();
+        model.addAttribute("list", list);
+        return "showAll";
+    }
+    //根据ID删除学生信息
+    @RequestMapping("removeById")
+    public String removeById(Integer id){
+        try{
+            cs.deleteById(id);
+            return "redirect/child/queryAll";
+        }catch(Exception e){
+            return "error";
+        }
+    }
+    //添加学生信息
+    @RequestMapping("addChild")
+    public String addChild(Child child){
+        try{
+            cs.addChild(child);
+            return "redirect:/child/queryAll";
+        }catch(Exception e){
+            e.printStackTrace()；
+            return "error";
+        }
+    }
+    //根据ID查询学生信息
+    @RequestMapping("queryById")
+    public String queryById(Integer id,ModelMap mm){
+        Child child = cs.queryById(id);
+        mm.addAttribute("child", child);
+        //跳转到修改页面，进行数据回显
+        return "update";
+    }
+}
+```
+**6**、jsp
+在resources.webapp包下的update.jsp中：
+```JSP
+<%@page contentType="text/html:charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+    <head>
+        <tittle>Tittle</tittle>
+    </head>
+    <body>
+        <center>
+            <h3>学生信息修改页面</h3>
+            <form action="${pageContent.request.contextPath}/child/changechild">
+                学生姓名：<input type="text" name="name" value="${child.name}"><br>
+                    <input type="hidden" name="id" value="${child.id}">
+                学生年龄：<input type="text" name="age" value="${child.age}"><br>
+                <!--之前是男的就是男的，是女的就是女的。需要借助el表达式，借助jstl的核心表达式-->
+                学生性别：<input type="radio" name="gender" value="男" 
+                    <c:if test="${child.gender='男'}">checked="checked"</c:if>
+                    >男
+                         <input type="radio" name="gender" value="女"
+                    <c:if test="${child.gender='女'}">checked="checked</c:if>     
+                    >女<br>
+                <input type="submit" value="修改">
+            </form>
+        </center>
+    </body>
+</html>
+```
+还需要再showAll,jsp添加一个修改的按钮：
+```JSP
+<%@page contentType="text/html:charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sum.com/jsp/jstl/core" %>
+<html>
+    <head>
+        <tittle>Tittle</tittle>
+    </head>
+    <body>
+        <center>
+            <h3>学生信息展示页面</h3>
+            <table border="," width="600px">
+                <tr>
+                    <td>学生编号</td>
+                    <td>学生姓名</td>
+                    <td>学生性别</td>
+                    <td>学生年龄</td>
+                    <td>学生操作</td>
+                </tr>
+                <c:foreach items="${list}" var="a">
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${a.name}</td>
+                        <td>${a.gender}</td>
+                        <td>${a.age}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/child/removeById?id=${a.id}">删除</a>
+                            <a href="${pageContext.request.contextPath}/child/queryById?id=${a.id}">修改</a>
+                        </td>
+                    </tr>
+                </c:foreach>
+            </table>
+            <a href="/add.jsp">添加学生信息/a>
+        </center>
+    </body>
+</html> 
+```
+**7**、修改学生信息之Dao接口
+在com.example.child.dao包下的IChildDao接口中：
+```Java
+@Mapper
+public interface IChildDao{
+    //全查学生信息
+    public List<Child> selectAll();
+    //根据id删除学生信息
+    public void deleteById(Integer id);
+    //添加学生信息
+    public void insertChild(Child child);
+    //根据ID查询学生信息
+    public Child selectById(Integer id);
+    //修改学生信息
+    public void updateChild(Child child);
+}
+```
+**8**、修改学生信息之Mapper映射文件
+在resources/mapper包下的childMapper.xml中：
+```XML
+<mapper namespace="com.example.child.dao.ChildDao">
+    <!--全查-->
+    <select id="selectAll" resultType="child">
+        SELECT * FROM child
+    </select>
+    <!--根据id删除学生信息-->
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM child WHERE id=#{id}
+    </delete>
+    <!--添加学生信息-->
+    <insert id="insertChild" parameterType="child">
+        INSERT INTO child(name,age,gender) value(#{name},#{age},#{gender})
+    </insert>
+    <!--根据ID查询学生信息-->
+    <select id="selectById" parameterType="Integer" resultType="child">
+        SELECT * FROM child WHERE id=#{id}
+    </select>
+    <!--修改学生信息-->
+    <update id="updateChild" parameterType="child">
+        UPDATE child SET name=#{name},age=#{age},gender=#{gender} WHERE id=#{id}
+    </selecct>
+</mapper>
+```
+**9**、修改学生信息之Service接口
+在com.example.child.service包下的IChildService接口：
+```Java
+public interface IChildService{
+    //全查学生信息
+    public List<Child> queryAll();
+    //根据ID删除学生信息
+    public void removeById(Integer id);
+    //添加学生信息
+    public void addChild(Child child);
+    //根据ID查询学生信息
+    public Child queryById(Integer id);
+    //修改学生信息
+    public void changeChild(Child child);
+}
+```
+**10**、修改学生信息之Service接口实现
+在com.example.child.service.impl包下的ChildServiceImpl类中：
+```Java
+@Service
+@Transactional
+public ChildServiceImple implements ChildService{
+    @Autowired
+    private ChildDao cd;
+    @Override
+    public List<Child> queryAll(){
+        return cd.selectAll();
+    }
+    @Override
+    public void removeById(Integer id){
+        try{
+            cd.deleteById(id);
+        }catch(Exception e){
+            throw new RuntimeException("根据ID删除有异常");
+        }
+    }
+    @Override
+    public void addChild(Child child){
+        try{
+            cd.insertChild(child);
+        }catch(Exception e){
+            throw new RuntimeException("添加有异常");
+        }
+    }
+    @Override
+    public Child queryById(Integer id){
+        return cd.selectById(id);
+    }
+    @Override
+    public void changeChild(Child child){
+        try{
+            cd.updateChild(child);
+        }catch(Exception e){
+            throw new RuntimeException("修改数据有异常");
+        }
+    }
 }
 ```
