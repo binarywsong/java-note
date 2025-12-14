@@ -12,9 +12,12 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: '环境',
+        text: '重生',
+        collapsed: true,
         items: [
-          { text: '项目搭建', link: '/setup/project-create' }
+          { text: '项目搭建', link: '/setup/project-create' },
+          { text: '快捷键', link: '/setup/terminal.md'},
+          { text: 'CRUD', link: '/setup/crud.md'}
         ]
       }
     ],
