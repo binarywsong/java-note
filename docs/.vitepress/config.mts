@@ -16,7 +16,7 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: '项目搭建', link: '/setup/project-create' },
-          { text: '快捷键', link: '/setup/terminal.'},
+          { text: '快捷键', link: '/setup/terminal'},
           { text: '工具', link: '/setup/javatool'},
           { text: 'CRUD', link: '/setup/crud'},
           { text: '业务代码', link: '/setup/demo1'}
