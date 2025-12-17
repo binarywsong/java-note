@@ -1,5 +1,5 @@
 ## 项目搭建及配置
-1、springboot的两个配置文件：application.yml pom.xml(负责导入maven的依赖)。在创建完项目之后，去数据库设计表结构，之后进行全局配置文件（application.yml）的编写。<br>
+1、springboot的两个配置文件：application.yml pom.xml(负责导入maven的依赖)。在创建完项目之后，去数据库设计表结构，之后进行全局配置文件（application.yml）的编写。<br />
 2、首先需要有一个用户需要的pojo类，即pojo包下创建的User类，需要这个User类映射为数据库的一个表，因为spring data jpa是面向对象的方式来去操作数据库，所以可以添加`@Table`、`@Entity`两个注解。这两个注解都是将一个类映射成一个表：
 ```Java
 @Table
@@ -21,12 +21,12 @@ public class User{
     ...
 }
 ```
-这样写它会报错，提示你添加主键id，我们可以将userId当作主键，添加`@Id`注解。<br>
+这样写它会报错，提示你添加主键id，我们可以将userId当作主键，添加`@Id`注解。<br />
 这个id你希望是以什么样的方式进行生成，**如果希望id是自动生成的方式，就加上`@GeneratedValue`注解，在注解里面指定生成的策略，给他指定为自增的方式**：
 ```Java
 @GeneratedValue(strategy=Generation.IdENTITY)
 ```
-**还可以用`@Column`改变字段名，因为默认情况下它会把属性名作为数据库表的字段名**：<br>
+**还可以用`@Column`改变字段名，因为默认情况下它会把属性名作为数据库表的字段名**：<br />
 `@Column(name="user_id")` //用蛇形命名不用驼峰式
 完整模板为：
 ```Java
@@ -61,8 +61,8 @@ public class User{
 }
 ```
 
-<br>
-<br>
+<br />
+<br />
 
 ## application.yml
 因为是要用java操作数据库，所以要配置数据源：
@@ -86,8 +86,8 @@ Spring:
         mapper-locations: classpath:/mapper/*Mapper.xml
 ```
 **可能出现的问题**：当在application.yml中配置数据源的时候，写完`type: com.alibaba.druid.pool.DruidDataSource`报红，是因为没有添加Druid连接池依赖。解决方法：在pom.xml中添加Druid依赖
-<br>
-<br>
+<br />
+<br />
 
 ## application.properties
 在maven项目中，application.properties文件是Spring Boot应用程序的配置文件之一，其中属性spring.application.name是springboot中的一个标准属性，它用于指定应用程序的名称，因此设置spring.application.name属性有助于在分布式环境中识别和管理应用程序
@@ -107,24 +107,25 @@ spring.jpa.properties.hibernate.format_sql=true
 <!--自动更新数据库表结构-->
 spring.jpa.hibernate.ddl-auto=update
 ```
-<br>
-如果我希望一启动项目它就自动为我生成数据库的表，怎么让它根据配置生成数据库的表呢，就需要在application.properties中加入这一项配置：<br>
-`spring.jpa.hibernate.ddl-auto=update`<br>
+<br />
+如果我希望一启动项目它就自动为我生成数据库的表，怎么让它根据配置生成数据库的表呢，就需要在application.properties中加入这一项配置：<br />
+`spring.jpa.hibernate.ddl-auto=update`
+<br />
 它会自动更新数据库表的结构，也就是说如果数据库没有这个表，它会插入；如果我添加了一个字段，他也会帮我在数据库里添加一个字段。
-<br>
-<br>
+<br />
+<br />
 
-**还有一个配置是格式化sql**，因为到时候生成的一些sql语句，希望让他打印在控制台，如果不格式化，他会全部一行显示，对我们开发进行调试就不太友好：<br>
+**还有一个配置是格式化sql**，因为到时候生成的一些sql语句，希望让他打印在控制台，如果不格式化，他会全部一行显示，对我们开发进行调试就不太友好：<br />
 `spring.jpa.properties.hibernate.format_sql=true`
-<br>
-<br>
+<br />
+<br />
 
-application.properties中还有一个配置，可以显示sql，当执行sql操作，以及生成表，他都会为控制台显示ui对应的sql语句<br>
-<br>
-<br>
+application.properties中还有一个配置，可以显示sql，当执行sql操作，以及生成表，他都会为控制台显示ui对应的sql语句<br />
+<br />
+<br />
 
 ## pom.xml
-是SprinBoot的依赖配置文件，一个标准的pom.xml会有一个标准的<parent>，这个<parent>就是继承springboot的一个父maven项目
+是SprinBoot的依赖配置文件，一个标准的pom.xml会有一个标准的`<parent>`，这个`<parent>`就是继承springboot的一个父maven项目
 ```XML
 <parent>
     <groupId>org.springframework.boot</groupId>
@@ -165,4 +166,4 @@ application.properties中还有一个配置，可以显示sql，当执行sql操�
 
 
 
-
+```

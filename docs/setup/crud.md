@@ -109,7 +109,7 @@ public class StudentController{
 ```
 **7**、jsp编写<br>
 在resources下创建一个文件夹webapp,其中创建showAll.jsp:
-```JSP
+```java
 <%@ page contentType="text/html:charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -248,7 +248,7 @@ public class ChildController{
 ```
 **6**、jsp
 在resources.webapp包下的showAll.jsp:
-```JSP
+```java
 <%@page contentType="text/html:charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -395,7 +395,7 @@ public class ChildController{
 ```
 **6**、jsp
 在webapp包下的add.jsp:
-```JSP
+```java
 <%@page contentType="text/html:charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -416,7 +416,7 @@ public class ChildController{
 </html>
 ```
 需要在showAll.jsp添加一个超链接：
-```jsp
+```java
 <%@page contentType="text/html:charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sum.com/jsp/jstl/core" %>
 <html>
@@ -584,7 +584,7 @@ public class ChildController(){
 ```
 **6**、jsp
 在resources.webapp包下的update.jsp中：
-```JSP
+```java
 <%@page contentType="text/html:charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -612,7 +612,7 @@ public class ChildController(){
 </html>
 ```
 还需要再showAll,jsp添加一个修改的按钮：
-```JSP
+```java
 <%@page contentType="text/html:charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sum.com/jsp/jstl/core" %>
 <html>

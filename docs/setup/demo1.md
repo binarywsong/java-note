@@ -117,7 +117,7 @@ public class UserServiceImpl implements IUserService{
     }
 }
 ```
-如果用Postman测试接口，当响应的数据是一个字符串，也有可能响应的数据是一个json，当前端调用https://localhost:8088/user,不能返回给前端乱七八糟的数据，因为前端会不知道怎么处理，所以对前端来说，它需要一个通用的响应数据的格式，故我们需要封装一个通用的返回数据类型：<br>
+如果用Postman测试接口，当响应的数据是一个字符串，也有可能响应的数据是一个json，当前端调用`https://localhost:8088/user`,不能返回给前端乱七八糟的数据，因为前端会不知道怎么处理，所以对前端来说，它需要一个通用的响应数据的格式，故我们需要封装一个通用的返回数据类型：<br>
 在com.example.user.pojo包下创建一个ReponseMessage：200代表成功；500代表内部服务器错误；404戴白哦没有请求的资源，还可以响应一个文本message，即请求成功，请求失败以文本的方式响应出去，还需要加一个相应的数据，因为如果是查询接口的话，肯定需要把查询的User给它返回回去，因为响应的类型是作为一个通用的类型，它不仅仅是用户Controller会用到，以后其他各种各样的Controller都会用这个统一的Controller来进行响应，，所以不能写：private User user;而是需要指定一个泛型，需要在类上声明一个泛型：`public class ResponseMessage<T>`,然后就可以给他传递任何的数据类型。private T data;它可以接收User对象，也可以接收后面新建的任何对象：
 ```Java
 public class RepositoryMessage<T>{
@@ -171,7 +171,7 @@ public class ResponseMessage<T>{
 }
 ```
 测试解耦返回结果模板：
-``` 
+```json
 {
     "code": 200,
     "message": "success",
@@ -209,11 +209,13 @@ public class UserDto{
 }
 ```
 还有需要改进的地方，当出现异常的时候，使用postman模拟发送，它返回的数据类型并不是所要求的统一数据类型：
-```
+```json
+    {
     "timestamp": "2024-07-29T13:19:26.875+00:00",
     "status": 400,
     "error": "Bad Request",
     "path": "/user"
+    }
 ```
 我们的统一数据类型是有code，有message:
 ```Java
@@ -279,6 +281,7 @@ public class UserController{
         return ReponseMessage.success(userNew);
     }
 }
+```
 因为业务方法是没有的，故创建，在com.example.user.service下的IUserService的接口：
 ```Java
 public interface IUserService{
@@ -336,7 +339,7 @@ public User getUser(Integer userId){
 ```
 因为如果用户ID没有查到用户，一般都是前端恶意用户的请求，因为按照正常来请求的话，一般是不会查到不存在的用户<br>
 我们在postman输入URL：localhost:8080/user/1,返回结果为：
-```
+```json
 {
     "code": 200,
     "message": "success",
