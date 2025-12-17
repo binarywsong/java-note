@@ -16,8 +16,31 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: '项目搭建', link: '/setup/project-create' },
-          { text: '快捷键', link: '/setup/terminal.md'},
-          { text: 'CRUD', link: '/setup/crud.md'}
+          { text: '快捷键', link: '/setup/terminal.'},
+          { text: '工具', link: '/setup/javatool'},
+          { text: 'CRUD', link: '/setup/crud'},
+          { text: '业务代码', link: '/setup/demo1'}
+        ]
+      },
+      {
+        text: 'Java知识',
+        collapsed: true,
+        items: [
+          {text: '注解', link:'/javaknowledge/annotate'}
+        ]
+      },
+      {
+        text: 'Java相关',
+        collapsed: true,
+        items: [
+          {text: 'git commit规范', link: '/javaconnect/demo1'}
+        ]
+      },
+      {
+        text: "问题",
+        collapsed: true,
+        items: [
+          {text: '后端问题', link: '/question/ideaquestion'}
         ]
       }
     ],

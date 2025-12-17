@@ -1,0 +1,20 @@
+## SpringBoot
+SpringBoot是一个脚手架，用于快速搭建一个基于Spring的web应用，开箱即用，创建即可开发业务代码，其设计是用来简化Spring应用的初始搭建以及开发过程。<br>
+SpringBoot的优点：
+1、创建了一个SpringBoot,内置就包含了Spring框架，所以可以快速构建一个独立的Spring应用程序；<br>
+2、内置了一些web服务器，比如说嵌入了Tomcat、Jetty、以及Undertow,不需要部署war包然后扔到对应的Web服务器里面。只需要将SpringBoot打成一个Jar包，然后通过Java跟Jar,就可以直接启动Web应用。<br>
+3、提供了各种各样的Starter,比如说要集成SpringMVC,就有SpringMVC对应的Starter,要集成redis,就有redis对应的starter,这样就可以简化Maven配置，以前整合redis可能会需要好几个依赖，现在一个starter就够了。并且它还帮我们管理了版本号，这样就可以减少依赖之间版本不一致带来的版本问题。<br>
+4、对一些Spring框架和一些第三方框架做一些默认的配置，称为自动配置类，采用约定大于配置的方式，只要你添加了对应的Starter依赖，就会包含对应的自动配置，从而让我们开箱即用，也可以修改默认的配置来达到定制化。<br>
+5、不需要配置XML,因为XML的可读性是非常差的，可以面向Java代码，通过纯注解的方式来进行开发，可读性变强了。<br>
+后端三层中的数据访问层通过Spring Data JPA去实现，因为它是Spring生态自带的，可以无缝的进行集成，然后快速操作数据库。<br>
+需要使用SpringMVC,所以要选择Spring Web;<br>
+需要链接数据库，所以要选择MySQL Driver（需要MySQL的驱动）<br>
+需要操作数据库，所以要选择Spring Data JPA。
+<br>
+<br>
+
+
+
+
+
+**dao、mapper、repository**

@@ -749,3 +749,57 @@ public ChildServiceImple implements ChildService{
     }
 }
 ```
+**11**、修改学生信息之Controller
+在com.example.child.controller包下的ChildControler中：
+```Java
+@Controller
+@RequestMapping("/child/")
+public class ChildController{
+    @Autowired
+    private ChildService cs;
+    @RequestMapping("queryAll")
+    public String queryAll(Model model){
+        List<Child> list=cs.queryAll();
+        model.addAttribute("list",list);
+        return "showAll";
+    }
+    //根据ID删除学生信息
+    @RequestMapping("removeById")
+    public String removeById(Integer id){
+        try{
+            cs.removeById(id);
+            return "redirect:/child/queryAll"
+        }catch(Exception e){
+            return "error";
+        }
+    }
+    //添加学生信息
+    @RequestMapping("addChild")
+    public String addChild(){
+        try{
+            cs.addChild(child);
+        }catch(Exception e){
+            e.printStackTrace();
+            return "error";
+        }
+    }
+    //根据ID查询学生信息
+    @Request("queryById")
+    puclic String queryById(Integer id, ModelMap mm){
+        Child child = cs.queryById(id);
+        mm.addAttribute("child",child);
+        return "update";
+    }
+    //修改学生信息
+    @RequestMapping("changChild")
+    public String changeChild(Child child){
+        try{
+            cs.changeChild(child);
+            return "redirect:/child/queryAll";
+        }catch(Exception e){
+            return "error";
+        }
+    }
+}
+```
+12、jsp即update.jsp
