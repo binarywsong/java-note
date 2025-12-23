@@ -85,6 +85,18 @@ Spring:
         //放置映射文件的路径，通常在resources里面建一个包mapper
         mapper-locations: classpath:/mapper/*Mapper.xml
 ```
+当使用JDBC连接上数据库之后，可以用`MyBatisX`插件对数据表生成代码<br>
+整合MyBatis到SpringBoot中，在application.yml中：
+```yml
+mybatis:
+    mapper-locations: classpath*: mapper/*.xml
+    type-aliases-package: com.example.his.pojo
+    configuration:
+        #输出执行的SQL语句
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+        #支持驼峰命名法
+        map-underscore_to_camel-case: true
+```
 **可能出现的问题**：当在application.yml中配置数据源的时候，写完`type: com.alibaba.druid.pool.DruidDataSource`报红，是因为没有添加Druid连接池依赖。解决方法：在pom.xml中添加Druid依赖
 <br />
 <br />

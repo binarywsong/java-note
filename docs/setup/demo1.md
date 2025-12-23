@@ -373,6 +373,77 @@ public class UserController{
         User userNew = userService.getUser(userId);
         return ResponseMessage.success(userNew);
     }
+
+    //修改
+    @PostMapping
+    public RepositoryMessage edit(@Validated @RequestBody UserDto user){
+        User userNew = userService.edit(user);
+        return ResponseMessage.success(userNew);
+    }
 }
 ```
+然后生成edit这个方法:<br>
+在com.example.user.service包下的IUserService中：
+```Java
+public interface IUserService{
+    /**
+     * 插入用户
+     * param user 参数
+     * @return 
+     */
+    User add(UserDto user);
+
+    /**
+     * 查询用户
+     * @param userId 用户id
+     * @return 
+     */
+    User getUser(Integer userId);
+
+    /**
+     * 修改用户
+     * param user 修改用户对象
+     * @return
+     */
+    User edit(UserDto user);
+} 
+```
+然后去到实现类，生成对应的这个方法：
+在com.example.user.service包下的UserService类中：
+```Java
+@Service    //将此类注册为spring的bean
+public class UserService implements IUserService{
+    @Autowired
+    UserRepository userRepository;
+
+    @Override
+    public User add(UserDto user){
+        User userPojo = new User();
+        BeanUtils.copyProperties(user,userPojo);
+        return userRepository.save(userPojo);   
+    }
+
+    @Override
+    public User getUser(Integer userId){
+        return userRepository.findById(userId).orElseThrow(()->{
+            throw new IllegalArgumentException("用户不存在，参数异常");
+        });
+    }
+
+
+    @Override
+    public User edit(UserDto user){
+        return userResponse.save();
+    }
+    //需要将dto对象转成pojo对象，因为save()方法只允许接收pojo类型的对象
+    //上面的edit方法换为：
+    @Override
+    public User edit(UserDto user){
+        User userPojo = new User();
+        BeanUtils.copyProperties(user,userPojo);
+        return userRepository.save(userPojo);
+    }
+}
+```
+
 

@@ -19,7 +19,8 @@ export default defineConfig({
           { text: '快捷键', link: '/setup/terminal'},
           { text: '工具', link: '/setup/javatool'},
           { text: 'CRUD', link: '/setup/crud'},
-          { text: '业务代码', link: '/setup/demo1'}
+          { text: '业务代码', link: '/setup/demo1'},
+          { text: '代码片段', link: '/setup/demo2'}
         ]
       },
       {
@@ -33,7 +34,8 @@ export default defineConfig({
         text: 'Java相关',
         collapsed: true,
         items: [
-          {text: 'git commit规范', link: '/javaconnect/demo1'}
+          {text: 'git commit规范', link: '/javaconnect/demo1'},
+          {text: 'Java相关', link: '/javaconnect/another'}
         ]
       },
       {

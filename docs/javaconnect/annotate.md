@@ -8,3 +8,6 @@
 
 ## @RequestMapping
 该注解需要给他加一级类级别的映射，即`@RequestMapping("/user")`,到时候客户端去访问我们当前的接口，即localhost:8080/user/** 来访问后面所有的接口。
+
+## @Configuration
+表示一个类为配置类
