@@ -178,12 +178,12 @@ public class ForEachDemo{
     }
 }
 ```
-循环变量：是循环控制的利器，但有不足的地方：<br>
+循环变量：是循环控制的利器，但有[不足的地方：<br>
 下面是一个二维数组：
 ```Java
 public class ForEachDemo{
     public static void main(String[] args){
-        int[][] n = {{1,2},{3,4,5},{6,7,8,9}};
+        int[][] n = {[1,2],[3,4,5],[6,7,8,9]};
         for(int i = 0;i<n[i].length;i++){
             for(int j = 0;j<n[i].length;i++){
                 System.out.println(n[i][j]);
@@ -201,7 +201,7 @@ public class ForEachDemo{
         for(int i = 0;i<s.length();i++){
             totalLength = totalLength + s[i].length();
         }
-        int[][] n = {{1,2},{3,4,5},{6,7,8,9,10}};
+        int[][] n = {[1,2],[3,4,5],[6,7,8,9,10]};
         for(int i = 0;i<n.length;i++){
             for(int j = 0;j<n[i].length;j++){
                 System.out.println(n[i][j]);
@@ -230,7 +230,7 @@ public class ForEachDemo{
 for-each循环不支持修改<br>
 例如for循环修改元素的值：
 ```Java
-int[][] n = {{1,2},{3,4,5},{6,7,8,9}};
+int[][] n = {[1,2],[3,4,5],[6,7,8,9]};
 for(int[] innerArray:n){
     for(int number:innerArray){
         number = number*10;
