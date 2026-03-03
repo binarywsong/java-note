@@ -20,14 +20,8 @@ export default defineConfig({
           { text: '工具', link: '/setup/javatool'},
           { text: 'CRUD', link: '/setup/crud'},
           { text: '业务代码', link: '/setup/demo1'},
-          { text: '代码片段', link: '/setup/demo2'}
-        ]
-      },
-      {
-        text: 'Java知识',
-        collapsed: true,
-        items: [
-          {text: '注解', link:'/javaknowledge/annotate'}
+          { text: '代码片段', link: '/setup/demo2'},
+          { text: '九行星', link: '/setup/demo3'}
         ]
       },
       {
@@ -35,7 +29,14 @@ export default defineConfig({
         collapsed: true,
         items: [
           {text: 'git commit规范', link: '/javaconnect/demo1'},
-          {text: 'Java相关', link: '/javaconnect/another'}
+          {text: 'Java相关', link: '/javaconnect/another'},
+          {text: '注解', link:'/javaconnect/annotate'}
+        ]
+      },
+      {
+        text: 'Java 0到1体系框架',
+        items: [
+          {text: '体系1', link: '/javaSystem/system1'}
         ]
       },
       {

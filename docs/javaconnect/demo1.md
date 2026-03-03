@@ -178,7 +178,7 @@ public class ForEachDemo{
     }
 }
 ```
-循环变量：是循环控制的利器，但有[不足的地方：<br>
+循环变量：是循环控制的利器，但有不足的地方：<br>
 下面是一个二维数组：
 ```Java
 public class ForEachDemo{
@@ -223,7 +223,6 @@ public class ForEachDemo{
             totalLength = totalLength + str.length();
         }
         //每次循环，Java从数组中取一个值，赋值给变量，取值从第0个元素开始，到最后一个元素为止
-
     }
 }
 ```
