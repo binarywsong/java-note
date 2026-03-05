@@ -788,3 +788,132 @@ public class SkuQueryDTO{
     private BigDecimal minPrice;
 }
 ```
+二分查找：
+```java
+public class lab_1 {
+
+    //二分查找
+    int binarySearch(int a[], int left, int right, int target){
+        int mid;
+        while(left<right){
+            mid = (left + right)/2;
+            if(a[mid] == target) return mid;
+            else if(a[mid] > target){
+                right = mid - 1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return -1;
+    }
+
+}
+```
+往数组中添加元素：
+```java
+public class ArrayTest2 {
+    //往数组里增加元素
+    public static void main(String[] args) {
+        int[] arr = new int[7];
+        arr[0] = 8;
+        arr[1] = 2;
+        arr[2] = 7;
+        arr[3] = 3;
+        arr[4] = 1;
+        arr[5] = 9;
+        arr = insert(arr, 5, 2);
+        for(int i = 0; i<arr.length; i++){
+            System.out.println(arr[i]);
+        }
+    }
+
+    /**
+     * @param arr:表示要操作的数组
+     * @param element:表示要插入的数字
+     * @param index:表示要插入的位置
+     * @return
+     */
+    public static int[] insert(int[] arr, int element, int index){
+        if(index<0||index>=arr.length){
+            throw new IndexOutOfBoundsException("超出数组实际元素范围");
+        }   
+        for(int i = arr.length-2; i>=index; i--){
+            arr[i+1] = arr[i];
+        }
+        arr[index] = element;
+        return arr;
+    }
+}
+```
+超范围往数组中添加元素：
+```java
+public class ArrayTest3 {
+    //超范围往数组中添加元素
+    int[] arr = {3,4,6,5,0};
+    int[] newArr = new int[arr.length+1];
+    for(int i = 0; i<arr.length; i++){
+        newArr[i] = arr[i];
+    }
+    newArr[newArr.length-1] = 9;
+    for(int i = 0; i<newArr.length; i++){
+        System.out.println(newArr[i]);
+    }
+}
+```
+删除数组中的元素:
+```java
+public class ArrayTest4 {
+    public static void main(String[] args) {
+        int[] arr = {8,2,7,3,1,9};
+        arr= delete(arr, 2);
+        for(int i = 0; i<arr.length; i++){
+            System.out.println(arr[i]);
+        }
+    }
+
+    /**
+     *
+     * @param arr:要进行删除操作的数组
+     * @param index:要删除元素的数组下标
+     * @return
+     */
+    public static int[] delete(int[] arr, int index){
+        if(index<0||index>arr.length-1){
+            throw new IndexOutOfBoundsException("下标不在数组元素范围内");
+        }
+        arr[index] = arr[arr.length-1];
+        int[] newArr = new int[arr.length-1];
+        for(int i = 0; i<newArr.length; i++){
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
+}
+```
+冒泡排序:
+```java
+public class ArrayTest5 {
+    public static void main(String[] args) {
+        int[] arr = {8,1,3,2,7};
+        arr = sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    /**
+     *
+     * @param arr:原始的无序数组
+     * @return
+     */
+    public static int[] sort(int[] arr){
+        for (int i = 0; i<arr.length-1; i++) {
+            for(int j=0; j<arr.length-i-1; j++){
+                if(arr[j]>arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+}
+```
