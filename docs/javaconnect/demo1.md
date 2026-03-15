@@ -215,12 +215,12 @@ for-each循环，用来简化for循环语法，代码就变成了：
 public class ForEachDemo{
     public static void main(String[] args){
         String[] s = {"a","bb","ccc","dddd"};
-        int totolLength = 0;
+        int totalLength = 0;
         //for(变量的类型就是数组元素的类型 变量str代表数组元素的值：数组）{
         //...
         //}
         for(String str:s){
-            totalLength = totalLength + str.length;
+            totalLength = totalLength + str.length();
         }
         //每次循环，Java从数组中取一个值，赋值给变量，取值从第0个元素开始，到最后一个元素为止
     }
