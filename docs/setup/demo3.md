@@ -917,3 +917,45 @@ public class ArrayTest5 {
     }
 }
 ```
+链表查找：
+```java
+public class MyLinkedList{
+
+    //头节点指针
+    private Node head;
+    //尾节点指针
+    private Node last;
+    //链表的实际长度
+    private int size;
+
+    public Node get(int index){
+        if(index<0||index>=size){
+            throw new IndexOutOfBoundsException("超出了链表的节点范围");
+        }
+        Node node = head;
+        for(int i = 1; i<index; i++){
+            node = node.next;
+        }
+        return node; 
+    }
+
+    //声明链表中的节点
+    public static class Node{
+        //数据域
+        int data;
+        //引用域
+        Node next;
+        Node(int datatime){
+            this.data = data;
+        }
+    }
+}
+```
+现在有一个表tb_user，其中有一个字段role是json数组格式，用户可以拥有多个角色。现有一超级管理员，要求按照用户姓名查询用户记录:
+```sql
+select u.username,
+    r.role_name as roleName
+from tb_user u
+join tb_role r on json_contains(u.role, convert(r.id, char))
+where u.name = "超级管理员"
+```

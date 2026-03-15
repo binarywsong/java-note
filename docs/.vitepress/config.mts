@@ -43,7 +43,8 @@ export default defineConfig({
         text: "问题",
         collapsed: true,
         items: [
-          {text: '后端问题', link: '/question/ideaquestion'}
+          {text: '后端问题', link: '/question/ideaquestion'},
+          {text: '前端问题', link: '/question/nodejsquestion'}
         ]
       }
     ],
