@@ -220,7 +220,7 @@ public class ForEachDemo{
         //...
         //}
         for(String str:s){
-            totalLength = totalLength + str.length();
+            totalLength = totalLength + str.length;
         }
         //每次循环，Java从数组中取一个值，赋值给变量，取值从第0个元素开始，到最后一个元素为止
     }
